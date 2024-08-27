@@ -1,3 +1,7 @@
+# Copyright (C) 2024 RTE
+# SPDX-License-Identifier: Apache-2.0
+
+---
 - name: Copy ptp_status executable files
   ansible.builtin.copy:
     src: ptpstatus/ptpstatus_script/ptpstatus.sh
