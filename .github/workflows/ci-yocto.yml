@@ -24,7 +24,7 @@ jobs:
 
       - name: Initialize sources
         run: mkdir ${{ env.WORK_DIR }}; cd ${{ env.WORK_DIR }};
-             git clone -q --depth 1 --recurse-submodules -b main https://github.com/seapath/ci ci;
+             git clone -q --depth 1 --recurse-submodules -b update-latency-report-script https://github.com/seapath/ci ci;
              echo "CI sources downloaded successfully";
              ci/launch-yocto.sh init;
 
@@ -50,6 +50,11 @@ jobs:
       - name: Launch latency tests
         run: cd ${{ env.WORK_DIR }};
             ci/launch-yocto.sh test_latency
+
+      - name: Upload test report
+        if: ${{ always() && steps.conf.conclusion == 'success' }}
+        run: cd ${{ env.WORK_DIR }};
+             ci/launch-yocto.sh report;
 
       - name: Upload test report
         if: ${{ always() && steps.conf.conclusion == 'success' }}
