@@ -18,16 +18,16 @@
       ansible.builtin.setup:
         filter: ansible_distribution
 
-- import_playbook: seapath_setup_prerequiscentos.yaml
+- include: seapath_setup_prerequiscentos.yaml
   when: ansible_distribution | regex_search("CentOS|RedHat")
 
-- import_playbook: seapath_setup_prerequisdebian.yaml
+- include: seapath_setup_prerequisdebian.yaml
   when: ansible_distribution | regex_search("Debian")
 
-- import_playbook: seapath_setup_prerequisyocto.yaml
+- include: seapath_setup_prerequisyocto.yaml
   when: ansible_distribution | regex_search("Yocto")
 
-- import_playbook: seapath_setup_network.yaml
+- include: seapath_setup_network.yaml
 
 - name: Configure timemaster
   hosts:
